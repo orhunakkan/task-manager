@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "jsx": "react",
+    "rootDir": "src",
+    "outDir": "dist",
+    "strict": true
+  },
+  "exclude": ["dist"],
+  "include": ["src/**/*"]
+}
