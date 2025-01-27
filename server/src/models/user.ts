@@ -1,5 +1,5 @@
-import mongoose, { Document, Schema } from "mongoose";
-import bcrypt from "bcrypt";
+import mongoose, { Document, Schema } from 'mongoose';
+import bcrypt from 'bcrypt';
 
 // Interface for User document
 interface IUser extends Document {
@@ -15,7 +15,7 @@ const userSchema = new Schema<IUser>(
   {
     email: {
       type: String,
-      required: [true, "Email is required"],
+      required: [true, 'Email is required'],
       unique: true,
       lowercase: true,
       trim: true,
@@ -23,17 +23,17 @@ const userSchema = new Schema<IUser>(
         validator: (email: string) => {
           return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         },
-        message: "Please enter a valid email address",
+        message: 'Please enter a valid email address',
       },
     },
     password: {
       type: String,
-      required: [true, "Password is required"],
-      minlength: [6, "Password must be at least 6 characters long"],
+      required: [true, 'Password is required'],
+      minlength: [6, 'Password must be at least 6 characters long'],
     },
     name: {
       type: String,
-      required: [true, "Name is required"],
+      required: [true, 'Name is required'],
       trim: true,
     },
   },
@@ -43,8 +43,8 @@ const userSchema = new Schema<IUser>(
 );
 
 // Hash password before saving
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
     return next();
   }
 
@@ -58,4 +58,4 @@ userSchema.pre("save", async function (next) {
 });
 
 // Create and export the model
-export const User = mongoose.model<IUser>("User", userSchema);
+export const User = mongoose.model<IUser>('User', userSchema);
