@@ -2,10 +2,14 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
+    "moduleResolution": "node",
     "jsx": "react",
     "rootDir": "src",
     "outDir": "dist",
-    "strict": true
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": ["dist"],
   "include": ["src/**/*"]
