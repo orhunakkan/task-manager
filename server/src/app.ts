@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import { User } from './models/user';
 import authRoutes from './routes/auth';
 import taskRoutes from './routes/tasks';
+import cors from 'cors';
 
 const app: Express = express();
 const port = 3000;
@@ -11,6 +12,8 @@ app.use(express.json());
 
 // Connect to MongoDB
 connectDatabase();
+
+app.use(cors());
 
 // Routes
 app.use('/api/users', authRoutes);
