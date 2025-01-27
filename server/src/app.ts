@@ -2,17 +2,19 @@ import express, { Express, Request, Response } from 'express';
 import { connectDatabase } from './config/database';
 import mongoose from 'mongoose';
 import { User } from './models/user';
-import authRoutes from './routes/auth'; // Add this import
+import authRoutes from './routes/auth';
+import taskRoutes from './routes/tasks';
 
 const app: Express = express();
 const port = 3000;
-app.use(express.json()); // Add this middleware to parse JSON bodies
+app.use(express.json());
 
 // Connect to MongoDB
 connectDatabase();
 
 // Routes
 app.use('/api/users', authRoutes);
+app.use('/api/tasks', taskRoutes);
 
 // Test route for database connection
 app.get('/db-test', async (_req: Request, res: Response) => {

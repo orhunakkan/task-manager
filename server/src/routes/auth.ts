@@ -15,7 +15,7 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
     if (existingUser) {
       res.status(400).json({
         status: 'error',
-        message: 'Email already registered'
+        message: 'Email already registered',
       });
       return;
     }
@@ -26,12 +26,12 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
 
     res.status(201).json({
       status: 'success',
-      message: 'User registered successfully'
+      message: 'User registered successfully',
     });
   } catch (error: any) {
     res.status(400).json({
       status: 'error',
-      message: error.message
+      message: error.message,
     });
   }
 });
@@ -46,7 +46,7 @@ router.post('/login', async (req: Request, res: Response): Promise<void> => {
     if (!user) {
       res.status(401).json({
         status: 'error',
-        message: 'Invalid credentials'
+        message: 'Invalid credentials',
       });
       return;
     }
@@ -56,17 +56,15 @@ router.post('/login', async (req: Request, res: Response): Promise<void> => {
     if (!isMatch) {
       res.status(401).json({
         status: 'error',
-        message: 'Invalid credentials'
+        message: 'Invalid credentials',
       });
       return;
     }
 
     // Generate JWT
-    const token = jwt.sign(
-      { userId: user._id },
-      JWT_SECRET,
-      { expiresIn: JWT_EXPIRES_IN }
-    );
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
+      expiresIn: JWT_EXPIRES_IN,
+    });
 
     res.json({
       status: 'success',
@@ -74,13 +72,13 @@ router.post('/login', async (req: Request, res: Response): Promise<void> => {
       user: {
         id: user._id,
         email: user.email,
-        name: user.name
-      }
+        name: user.name,
+      },
     });
   } catch (error: any) {
     res.status(400).json({
       status: 'error',
-      message: error.message
+      message: error.message,
     });
   }
 });
