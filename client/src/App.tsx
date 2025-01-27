@@ -21,17 +21,26 @@ export const App: React.FC = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/login" className="text-gray-700 hover:text-gray-900">
+                    <Link
+                      to="/login"
+                      className="text-gray-700 hover:text-gray-900"
+                    >
                       Login
                     </Link>
                   </li>
                   <li>
-                    <Link to="/register" className="text-gray-700 hover:text-gray-900">
+                    <Link
+                      to="/register"
+                      className="text-gray-700 hover:text-gray-900"
+                    >
                       Register
                     </Link>
                   </li>
                   <li>
-                    <Link to="/dashboard" className="text-gray-700 hover:text-gray-900">
+                    <Link
+                      to="/dashboard"
+                      className="text-gray-700 hover:text-gray-900"
+                    >
                       Dashboard
                     </Link>
                   </li>
