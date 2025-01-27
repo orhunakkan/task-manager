@@ -14,6 +14,7 @@
   "author": "Orhun Akkan",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",
     "@types/mongoose": "^5.11.97",
     "@typescript-eslint/eslint-plugin": "^8.21.0",
@@ -24,6 +25,7 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.21.2",
     "mongoose": "^8.9.5"
   }
