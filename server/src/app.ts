@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import { connectDatabase } from './config/database';
 import mongoose from 'mongoose';
 import { User } from './models/user';
+import authRoutes from './routes/auth'; // Add this import
 
 const app: Express = express();
 const port = 3000;
@@ -9,6 +10,9 @@ app.use(express.json()); // Add this middleware to parse JSON bodies
 
 // Connect to MongoDB
 connectDatabase();
+
+// Routes
+app.use('/api/users', authRoutes);
 
 // Test route for database connection
 app.get('/db-test', async (_req: Request, res: Response) => {

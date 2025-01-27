@@ -8,6 +8,7 @@ interface IUser extends Document {
   name: string;
   createdAt: Date;
   updatedAt: Date;
+  comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
 // Create the schema
@@ -56,6 +57,10 @@ userSchema.pre('save', async function (next) {
     next(error);
   }
 });
+
+userSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
+  return bcrypt.compare(candidatePassword, this.password);
+};
 
 // Create and export the model
 export const User = mongoose.model<IUser>('User', userSchema);
