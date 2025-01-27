@@ -24,43 +24,61 @@ export const Register: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      {success && <div style={{ color: 'green' }}>{success}</div>}
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
+      <h1 className="text-2xl font-bold mb-6 text-center">Register</h1>
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {error}
+        </div>
+      )}
+      {success && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+          {success}
+        </div>
+      )}
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label>Name:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Name:
+          </label>
           <input
             type="text"
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
           />
         </div>
         <div>
-          <label>Email:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Email:
+          </label>
           <input
             type="email"
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
             value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             required
           />
         </div>
         <div>
-          <label>Password:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Password:
+          </label>
           <input
             type="password"
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
             value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             required
           />
         </div>
-        <button type="submit">Register</button>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          Register
+        </button>
       </form>
     </div>
   );
