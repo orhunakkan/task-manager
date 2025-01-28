@@ -21,24 +21,17 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     
     - name: Install and Lint Client
       working-directory: ./client
       run: |
-        npm ci
+        npm install
         npm run lint
+        npm run format:check
     
     - name: Install and Lint Server
       working-directory: ./server
       run: |
-        npm ci
+        npm install
         npm run lint
-
-    - name: Check Client Formatting
-      working-directory: ./client
-      run: npm run format:check
-
-    - name: Check Server Formatting
-      working-directory: ./server
-      run: npm run format:check
+        npm run format:check
