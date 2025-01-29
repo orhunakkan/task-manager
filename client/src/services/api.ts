@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000/api';
-
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: '/api',
 });
 
 api.interceptors.request.use((config) => {
@@ -13,5 +11,13 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+export const register = (userData: any) => {
+  return api.post('/users/register', userData);
+};
+
+export const login = (credentials: any) => {
+  return api.post('/users/login', credentials);
+};
 
 export default api;
