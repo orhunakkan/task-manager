@@ -1,0 +1,13 @@
+{
+    "vitest.commandLine": "npm test",
+    "vitest.include": [
+      "client/src/**/*.{test,spec}.{js,jsx,ts,tsx}",
+      "server/src/**/*.{test,spec}.{js,ts}"
+    ],
+    "vitest.exclude": [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/coverage/**"
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
+  }
