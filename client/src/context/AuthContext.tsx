@@ -16,6 +16,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    // Check for token and user in localStorage on mount
     const token = localStorage.getItem('token');
     const storedUser = localStorage.getItem('user');
     if (token && storedUser) {
@@ -36,6 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     localStorage.removeItem('user');
     setIsAuthenticated(false);
     setUser(null);
+    window.location.href = '/login';
   };
 
   return (

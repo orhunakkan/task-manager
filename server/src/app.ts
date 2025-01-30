@@ -14,12 +14,13 @@ const app: Express = express();
 const port = process.env.PORT || 8080;
 
 // Configure CORS
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? false 
-    : ['http://localhost:3000'],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === 'production' ? false : ['http://localhost:3000'],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
