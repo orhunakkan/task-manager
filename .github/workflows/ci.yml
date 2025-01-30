@@ -7,6 +7,46 @@ on:
     branches: [ master ]
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Client - Install and Test
+      working-directory: ./client
+      run: |
+        npm ci
+        npm run test:coverage
+    
+    - name: Server - Install and Test
+      working-directory: ./server
+      run: |
+        npm ci
+        npm run test:coverage
+
+    - name: Upload Client Coverage
+      uses: actions/upload-artifact@v3
+      with:
+        name: client-coverage
+        path: client/coverage
+
+    - name: Upload Server Coverage
+      uses: actions/upload-artifact@v3
+      with:
+        name: server-coverage
+        path: server/coverage
+
   lint:
     runs-on: ubuntu-latest
     
@@ -21,17 +61,18 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'npm'
     
-    - name: Install and Lint Client
+    - name: Client - Install and Lint
       working-directory: ./client
       run: |
-        npm install
+        npm ci
         npm run lint
         npm run format:check
     
-    - name: Install Lint and Test Server
+    - name: Server - Install and Lint
       working-directory: ./server
       run: |
-        npm install
+        npm ci
         npm run lint
         npm run format:check
