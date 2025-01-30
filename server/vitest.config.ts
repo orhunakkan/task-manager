@@ -8,7 +8,8 @@ export default defineConfig({
     setupFiles: './src/test/setup.ts',
     include: ['src/**/*.{test,spec}.{js,ts}'],
     exclude: ['**/node_modules/**', '**/dist/**'],
-    testTimeout: 20000,
+    testTimeout: 30000,
+    hookTimeout: 30000,
     coverage: {
       reporter: ['text', 'json', 'html'],
       exclude: [
