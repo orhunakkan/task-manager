@@ -5,15 +5,14 @@ dotenv.config();
 
 const connectDB = async (): Promise<void> => {
   try {
-    // If already connected, return
     if (mongoose.connection.readyState === 1) {
       return;
     }
 
-    const mongoUri = process.env.MONGODB_URI;
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
 
     if (!mongoUri) {
-      throw new Error('MONGODB_URI is not defined in environment variables');
+      throw new Error('MongoDB connection string is not defined');
     }
 
     await mongoose.connect(mongoUri);
