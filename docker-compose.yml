@@ -16,6 +16,7 @@ services:
     environment:
       - MONGODB_URI=mongodb://mongo:27017/task-manager
       - JWT_SECRET=your-development-secret
+      - NODE_ENV=development
     volumes:
       - ./server:/app
       - /app/node_modules
@@ -28,6 +29,9 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+      - WDS_SOCKET_PORT=0
     volumes:
       - ./client:/app
       - /app/node_modules

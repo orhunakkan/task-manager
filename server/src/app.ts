@@ -13,21 +13,27 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT || 8080;
 
-// Middleware
-app.use(cors());
+// Configure CORS
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? false 
+    : ['http://localhost:3000'],
+  credentials: true
+}));
+
 app.use(express.json());
 
-// Serve static files from the React app
+// Routes first
+app.use('/api/users', authRoutes);
+app.use('/api/tasks', taskRoutes);
+
+// Static files after routes
 app.use(express.static(path.join(__dirname, '../public')));
 
 // Connect to MongoDB
 connectDB();
 
-// Routes
-app.use('/api/users', authRoutes);
-app.use('/api/tasks', taskRoutes);
-
-// Catch-all handler for React's index.html
+// Catch-all handler last
 app.get('*', (_req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
