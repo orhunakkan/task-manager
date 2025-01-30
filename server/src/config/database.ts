@@ -5,6 +5,11 @@ dotenv.config();
 
 const connectDB = async (): Promise<void> => {
   try {
+    // If already connected, return
+    if (mongoose.connection.readyState === 1) {
+      return;
+    }
+
     const mongoUri = process.env.MONGODB_URI;
 
     if (!mongoUri) {
