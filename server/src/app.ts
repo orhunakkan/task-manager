@@ -32,8 +32,13 @@ app.get('*', (_req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+let server: ReturnType<typeof app.listen>;
 
-export default app;
+// Only start the server if we're not in test mode
+if (process.env.NODE_ENV !== 'test') {
+  server = app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}
+
+export { app, server };
