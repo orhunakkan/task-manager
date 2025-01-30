@@ -12,7 +12,10 @@
     "build": "tsc",
     "start": "node dist/app.js",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\"",
-    "format:check": "prettier --check \"src/**/*.{js,ts,tsx}\""
+    "format:check": "prettier --check \"src/**/*.{js,ts,tsx}\"",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down",
+    "docker:build": "docker-compose build"
   },
   "keywords": [],
   "author": "Orhun Akkan",

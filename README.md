@@ -1,6 +1,6 @@
 # Task Manager Application
 
-A full-stack task management application built with React, Node.js, TypeScript, and MongoDB. Users can create accounts, log in, and manage their tasks with CRUD operations.
+A full-stack task management application built with React, Node.js, TypeScript, and MongoDB.
 
 ## 🚀 Tech Stack
 
@@ -9,27 +9,28 @@ A full-stack task management application built with React, Node.js, TypeScript, 
 - React Router for navigation
 - Axios for API requests
 - TailwindCSS for styling
-- Jest for testing
+- Vitest for testing
 
 ### Backend
 - Node.js with Express
 - TypeScript
 - MongoDB with Mongoose
 - JWT for authentication
-- Jest for testing
+- Vitest for testing
 
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed:
 - Node.js (v18.x or later)
-- MongoDB (local installation or MongoDB Atlas account)
+- MongoDB (local installation)
+- Docker and Docker Compose (optional)
 - Git
 
 ## 🛠️ Installation & Setup
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/task-manager.git
+git clone <repository-url>
 cd task-manager
 ```
 

@@ -12,7 +12,10 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\"",
-    "format:check": "prettier --check \"src/**/*.{js,ts,tsx}\""
+    "format:check": "prettier --check \"src/**/*.{js,ts,tsx}\"",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down",
+    "docker:build": "docker-compose build"
   },
   "keywords": [],
   "author": "Orhun Akkan",
