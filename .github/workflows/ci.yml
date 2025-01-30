@@ -21,19 +21,26 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    
-    - name: Client - Install and Test
+
+    - name: Client - Install Dependencies
       working-directory: ./client
       run: |
+        npm install
         npm ci
-        npm run test:coverage
+        
+    - name: Client - Run Tests
+      working-directory: ./client
+      run: npm run test:coverage
     
-    - name: Server - Install and Test
+    - name: Server - Install Dependencies
       working-directory: ./server
       run: |
+        npm install
         npm ci
-        npm run test:coverage
+        
+    - name: Server - Run Tests
+      working-directory: ./server
+      run: npm run test:coverage
 
     - name: Upload Client Coverage
       uses: actions/upload-artifact@v3
@@ -61,18 +68,27 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    
-    - name: Client - Install and Lint
+
+    - name: Client - Install Dependencies
       working-directory: ./client
       run: |
+        npm install
         npm ci
+        
+    - name: Client - Run Lint
+      working-directory: ./client
+      run: |
         npm run lint
         npm run format:check
     
-    - name: Server - Install and Lint
+    - name: Server - Install Dependencies
       working-directory: ./server
       run: |
+        npm install
         npm ci
+        
+    - name: Server - Run Lint
+      working-directory: ./server
+      run: |
         npm run lint
         npm run format:check
