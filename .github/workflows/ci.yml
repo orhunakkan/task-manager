@@ -22,6 +22,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    # Start MongoDB using MongoDB Memory Server
+    - name: Setup MongoDB Memory Server
+      run: |
+        echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> $GITHUB_ENV
+
     - name: Client - Install Dependencies
       working-directory: ./client
       run: |
@@ -42,6 +47,9 @@ jobs:
         
     - name: Server - Run Tests
       working-directory: ./server
+      env:
+        MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        JWT_SECRET: "test-secret"
       run: npm run test:coverage
 
     - name: Upload Client Coverage
