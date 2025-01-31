@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { WebSocketProvider } from './context/WebSocketContext';
@@ -21,7 +21,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
 };
 
 // Navigation component
-const Navigation: React.FC = () => {
+const Navigation: React.FC<{ darkMode: boolean; setDarkMode: React.Dispatch<React.SetStateAction<boolean>> }> = ({ darkMode, setDarkMode }) => {
   const { isAuthenticated, logout } = useAuth();
 
   return (
@@ -74,6 +74,12 @@ const Navigation: React.FC = () => {
               </>
             )}
           </ul>
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="text-gray-700 hover:text-gray-900"
+          >
+            {darkMode ? 'Light Mode' : 'Dark Mode'}
+          </button>
         </div>
       </div>
     </nav>
@@ -81,12 +87,22 @@ const Navigation: React.FC = () => {
 };
 
 export const App: React.FC = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
   return (
     <AuthProvider>
       <WebSocketProvider>
         <BrowserRouter>
-          <div className="min-h-screen bg-gray-100">
-            <Navigation />
+          <div className="min-h-screen dark:bg-gray-900 bg-gray-100">
+            <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
             <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
               <Routes>
                 <Route path="/" element={<Home />} />
