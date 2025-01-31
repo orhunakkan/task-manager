@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from '../context/AuthContext';
 import api from '../services/api';
 import React from 'react';
+import testLogger from '../test/testLogger';
 
 // Mock the api module
 vi.mock('../services/api', () => ({
@@ -25,13 +26,18 @@ vi.mock('react-router-dom', async () => {
 
 describe('Login Component', () => {
   const renderLogin = () => {
-    return render(
-      <BrowserRouter>
-        <AuthProvider>
-          <Login />
-        </AuthProvider>
-      </BrowserRouter>
-    );
+    try {
+      return render(
+        <BrowserRouter>
+          <AuthProvider>
+            <Login />
+          </AuthProvider>
+        </BrowserRouter>
+      );
+    } catch (error) {
+      testLogger.error('Error rendering Login component:', error);
+      throw error;
+    }
   };
 
   beforeEach(() => {
@@ -39,52 +45,62 @@ describe('Login Component', () => {
   });
 
   it('renders login form', () => {
-    renderLogin();
-
-    // Check if the form elements are rendered
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
+    try {
+      renderLogin();
+      expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+      expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /login/i })
+      ).toBeInTheDocument();
+    } catch (error) {
+      testLogger.error('Error in login form render test:', error);
+      throw error;
+    }
   });
 
   it('handles input changes', () => {
-    renderLogin();
+    try {
+      renderLogin();
+      const emailInput = screen.getByLabelText(/email/i);
+      const passwordInput = screen.getByLabelText(/password/i);
 
-    const emailInput = screen.getByLabelText(/email/i);
-    const passwordInput = screen.getByLabelText(/password/i);
+      fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+      fireEvent.change(passwordInput, { target: { value: 'password123' } });
 
-    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password123' } });
-
-    expect(emailInput).toHaveValue('test@example.com');
-    expect(passwordInput).toHaveValue('password123');
+      expect(emailInput).toHaveValue('test@example.com');
+      expect(passwordInput).toHaveValue('password123');
+    } catch (error) {
+      testLogger.error('Error in input changes test:', error);
+      throw error;
+    }
   });
 
   it('handles successful login', async () => {
-    renderLogin();
+    try {
+      renderLogin();
+      const mockResponse = {
+        data: {
+          token: 'fake-token',
+          user: { id: 1, email: 'test@example.com' },
+        },
+      };
+      (api.post as any).mockResolvedValueOnce(mockResponse);
 
-    // Mock successful API response
-    const mockResponse = {
-      data: {
-        token: 'fake-token',
-        user: { id: 1, email: 'test@example.com' },
-      },
-    };
-    (api.post as any).mockResolvedValueOnce(mockResponse);
+      fireEvent.change(screen.getByLabelText(/email/i), {
+        target: { value: 'test@example.com' },
+      });
+      fireEvent.change(screen.getByLabelText(/password/i), {
+        target: { value: 'password123' },
+      });
+      fireEvent.click(screen.getByRole('button', { name: /login/i }));
 
-    // Fill and submit form
-    fireEvent.change(screen.getByLabelText(/email/i), {
-      target: { value: 'test@example.com' },
-    });
-    fireEvent.change(screen.getByLabelText(/password/i), {
-      target: { value: 'password123' },
-    });
-    fireEvent.click(screen.getByRole('button', { name: /login/i }));
-
-    await waitFor(() => {
-      // Check if navigation occurred
-      expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
-    });
+      await waitFor(() => {
+        expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
+      });
+    } catch (error) {
+      testLogger.error('Error in successful login test:', error);
+      throw error;
+    }
   });
 
   it('handles login failure', async () => {
