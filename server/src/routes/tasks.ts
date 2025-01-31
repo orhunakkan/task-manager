@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import { Task, TaskStatus } from '../models/task';
 import { authenticateUser } from '../middleware/auth';
+import { wsService } from '../app';
 
 /**
  * @swagger
@@ -50,6 +51,9 @@ router.post('/', authenticateUser, async (req: Request, res: Response) => {
       createdBy: req.user?.userId,
     });
     await task.save();
+
+    // Notify user of new task
+    wsService.notifyUser(req.user!.userId, 'task:created', task);
 
     res.status(201).json({
       status: 'success',
@@ -145,6 +149,9 @@ router.put('/:id', authenticateUser, async (req: Request, res: Response) => {
       return;
     }
 
+    // Notify user of updated task
+    wsService.notifyUser(req.user!.userId, 'task:updated', task);
+
     res.json({
       status: 'success',
       task,
@@ -172,6 +179,9 @@ router.delete('/:id', authenticateUser, async (req: Request, res: Response) => {
       });
       return;
     }
+
+    // Notify user of deleted task
+    wsService.notifyUser(req.user!.userId, 'task:deleted', task);
 
     res.json({
       status: 'success',

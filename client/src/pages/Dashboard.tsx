@@ -33,6 +33,32 @@ export const Dashboard: React.FC = () => {
     fetchTasks();
   }, [isAuthenticated, navigate]);
 
+  useEffect(() => {
+    const handleTaskCreated = (e: CustomEvent) => {
+      setTasks(prev => [...prev, e.detail]);
+    };
+
+    const handleTaskUpdated = (e: CustomEvent) => {
+      setTasks(prev => prev.map(task => 
+        task._id === e.detail._id ? e.detail : task
+      ));
+    };
+
+    const handleTaskDeleted = (e: CustomEvent) => {
+      setTasks(prev => prev.filter(task => task._id !== e.detail._id));
+    };
+
+    window.addEventListener('taskCreated', handleTaskCreated as EventListener);
+    window.addEventListener('taskUpdated', handleTaskUpdated as EventListener);
+    window.addEventListener('taskDeleted', handleTaskDeleted as EventListener);
+
+    return () => {
+      window.removeEventListener('taskCreated', handleTaskCreated as EventListener);
+      window.removeEventListener('taskUpdated', handleTaskUpdated as EventListener);
+      window.removeEventListener('taskDeleted', handleTaskDeleted as EventListener);
+    };
+  }, []);
+
   const fetchTasks = async () => {
     try {
       const response = await api.get('/tasks');

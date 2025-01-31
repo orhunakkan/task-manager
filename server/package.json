@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest --config ./vitest.config.ts",
+    "server-tests": "vitest --config ./vitest.config.ts",
     "test:watch": "vitest watch --config ./vitest.config.ts",
     "test:coverage": "vitest run --coverage --config ./vitest.config.ts",
     "lint": "eslint .",
@@ -48,6 +48,7 @@
   "dependencies": {
     "@types/dotenv": "^6.1.1",
     "@types/mongodb-memory-server": "^2.3.0",
+    "@types/ws": "^8.5.14",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
@@ -58,6 +59,7 @@
     "mongoose": "^8.9.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "ws": "^8.18.0"
   }
 }

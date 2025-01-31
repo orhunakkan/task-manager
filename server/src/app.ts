@@ -9,6 +9,8 @@ import swaggerOptions from './config/swagger';
 import { requestLogger } from './middleware/requestLogger';
 import { errorHandler } from './middleware/errorHandler';
 import logger from './config/logger';
+import http from 'http';
+import WebSocketService from './services/websocket';
 
 // Routes
 import taskRoutes from './routes/tasks';
@@ -55,11 +57,19 @@ app.get('*', (_req: Request, res: Response) => {
 // Error handling middleware should be last
 app.use(errorHandler);
 
-let server: ReturnType<typeof app.listen>;
+// Create HTTP server
+const httpServer = http.createServer(app);
+
+// Initialize WebSocket service only in non-test environment
+export const wsService = process.env.NODE_ENV !== 'test' 
+  ? new WebSocketService(httpServer)
+  : new WebSocketService(null as any); // Pass null for test environment
+
+let server: ReturnType<typeof httpServer.listen>;
 
 // Only start the server if we're not in test mode
 if (process.env.NODE_ENV !== 'test') {
-  server = app.listen(port, () => {
+  httpServer.listen(port, () => {
     logger.info(`Server is running on port ${port}`);
   });
 }
@@ -76,4 +86,4 @@ process.on('unhandledRejection', (error: Error) => {
   process.exit(1);
 });
 
-export { app, server };
+export { app, httpServer as server };

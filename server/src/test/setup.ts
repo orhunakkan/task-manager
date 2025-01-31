@@ -1,7 +1,18 @@
-import { beforeAll, afterAll, afterEach } from 'vitest';
+import { beforeAll, afterAll, afterEach, vi } from 'vitest';
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { server } from '../app';
+
+// Mock WebSocket service
+vi.mock('../services/websocket', () => {
+  return {
+    default: class MockWebSocketService {
+      constructor() {}
+      notifyUser() {}
+      notifyUsers() {}
+    },
+  };
+});
 
 let mongoServer: MongoMemoryServer;
 

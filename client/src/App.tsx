@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { WebSocketProvider } from './context/WebSocketContext';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
@@ -82,26 +83,28 @@ const Navigation: React.FC = () => {
 export const App: React.FC = () => {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <div className="min-h-screen bg-gray-100">
-          <Navigation />
-          <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </main>
-        </div>
-      </BrowserRouter>
+      <WebSocketProvider>
+        <BrowserRouter>
+          <div className="min-h-screen bg-gray-100">
+            <Navigation />
+            <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+            </main>
+          </div>
+        </BrowserRouter>
+      </WebSocketProvider>
     </AuthProvider>
   );
 };
