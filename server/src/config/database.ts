@@ -5,7 +5,13 @@ dotenv.config();
 
 const connectDB = async (): Promise<void> => {
   try {
+    // If already connected, return early
     if (mongoose.connection.readyState === 1) {
+      return;
+    }
+
+    // Skip real MongoDB connection if we're in test environment
+    if (process.env.NODE_ENV === 'test') {
       return;
     }
 
@@ -19,7 +25,10 @@ const connectDB = async (): Promise<void> => {
     console.log('MongoDB connected successfully');
   } catch (error) {
     console.error('MongoDB connection error:', error);
-    process.exit(1);
+    // Don't exit process if in test environment
+    if (process.env.NODE_ENV !== 'test') {
+      process.exit(1);
+    }
   }
 };
 

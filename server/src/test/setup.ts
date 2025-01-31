@@ -6,15 +6,19 @@ import { server } from '../app';
 let mongoServer: MongoMemoryServer;
 
 beforeAll(async () => {
-  // Close any existing connections
-  await mongoose.disconnect();
+  // Set test environment
+  process.env.NODE_ENV = 'test';
 
+  // Create new mongo memory server
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
+
+  // Connect to the in-memory database
   await mongoose.connect(mongoUri);
 });
 
 afterAll(async () => {
+  // Cleanup
   await mongoose.disconnect();
   await mongoServer.stop();
   if (server) {
@@ -23,6 +27,7 @@ afterAll(async () => {
 });
 
 afterEach(async () => {
+  // Clear all test data after each test
   const collections = mongoose.connection.collections;
   for (const key in collections) {
     await collections[key].deleteMany();
