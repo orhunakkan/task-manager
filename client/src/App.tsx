@@ -21,7 +21,10 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
 };
 
 // Navigation component
-const Navigation: React.FC<{ darkMode: boolean; setDarkMode: React.Dispatch<React.SetStateAction<boolean>> }> = ({ darkMode, setDarkMode }) => {
+const Navigation: React.FC<{
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ darkMode, setDarkMode }) => {
   const { isAuthenticated, logout } = useAuth();
 
   return (
