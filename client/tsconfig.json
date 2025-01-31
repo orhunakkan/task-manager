@@ -9,7 +9,11 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@playwright/test": ["node_modules/@playwright/test"]
+    }
   },
   "exclude": ["dist"],
   "include": ["src/**/*"]
