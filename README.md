@@ -1,34 +1,55 @@
 # Task Manager Application
 
-A full-stack task management application built with React, Node.js, TypeScript, and MongoDB.
+A full-stack task management application built with modern technologies that allows users to create, manage and track tasks efficiently.
+
+## 📑 Table of Contents
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Docker Deployment](#docker-deployment)
+- [Testing](#testing)
+- [API Documentation](#api-documentation)
+- [Project Architecture](#project-architecture)
+- [Best Practices & Security](#best-practices--security)
+- [Contributing](#contributing)
+
+## ✨ Features
+- User authentication and authorization
+- Create, read, update, and delete tasks
+- Task status management (todo, in_progress, completed)
+- Real-time updates using WebSocket
+- Responsive design for mobile and desktop
+- API documentation with Swagger
 
 ## 🚀 Tech Stack
 
 ### Frontend
-- React with TypeScript
-- React Router for navigation
-- Axios for API requests
+- React 18 with TypeScript
 - TailwindCSS for styling
-- Vitest for testing
+- Vitest for unit testing
+- React Router for navigation
+- Axios for API communication
 
 ### Backend
 - Node.js with Express
-- TypeScript
+- TypeScript for type safety
 - MongoDB with Mongoose
-- JWT for authentication
-- Vitest for testing
+- JWT authentication
+- WebSocket for real-time updates
+- Swagger for API documentation
 
 ## 📋 Prerequisites
-
-Before you begin, ensure you have the following installed:
 - Node.js (v18.x or later)
-- MongoDB (local installation)
+- MongoDB (local installation or Atlas URI)
 - Docker and Docker Compose (optional)
 - Git
 
-## 🛠️ Installation & Setup
+## 🛠️ Getting Started
 
-### 1. Clone the Repository
+### Local Development Setup
+
+1. Clone the repository:
 ```bash
 git clone <repository-url>
 cd task-manager
