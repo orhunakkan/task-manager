@@ -9,8 +9,8 @@ export default defineConfig({
   fullyParallel: true,
   retries: 1,
   reporter: [
-    ['html', { outputFolder: 'e2e/playwright/playwright-report' }],
-    ['json', { outputFile: 'e2e/playwright/test-results/results.json' }]
+    ['html', { outputFolder: '/playwright-report' }],
+    ['json', { outputFile: '/test-results/results.json' }]
   ],
   use: {
     baseURL: 'http://localhost:3000',
@@ -30,5 +30,5 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
   ],
-  outputDir: 'e2e/playwright/test-results',
+  outputDir: '/test-results',
 });
