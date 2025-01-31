@@ -115,12 +115,15 @@ export const Dashboard: React.FC = () => {
   };
 
   const openEditModal = (task: Task) => {
+    const formattedDate = task.dueDate
+      ? new Date(task.dueDate).toISOString().split('T')[0]
+      : '';
     setEditingTask(task);
     setFormData({
       title: task.title,
       description: task.description,
       status: task.status,
-      dueDate: task.dueDate || '',
+      dueDate: formattedDate,
     });
   };
 
