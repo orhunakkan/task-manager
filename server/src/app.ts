@@ -6,6 +6,9 @@ import cors from 'cors';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import swaggerOptions from './config/swagger';
+import { requestLogger } from './middleware/requestLogger';
+import { errorHandler } from './middleware/errorHandler';
+import logger from './config/logger';
 
 // Routes
 import taskRoutes from './routes/tasks';
@@ -15,6 +18,9 @@ dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 8080;
+
+// Request logging middleware should be first
+app.use(requestLogger);
 
 // Configure CORS
 app.use(
@@ -46,13 +52,28 @@ app.get('*', (_req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+// Error handling middleware should be last
+app.use(errorHandler);
+
 let server: ReturnType<typeof app.listen>;
 
 // Only start the server if we're not in test mode
 if (process.env.NODE_ENV !== 'test') {
   server = app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    logger.info(`Server is running on port ${port}`);
   });
 }
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (error: Error) => {
+  logger.error('Uncaught Exception:', error);
+  process.exit(1);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (error: Error) => {
+  logger.error('Unhandled Rejection:', error);
+  process.exit(1);
+});
 
 export { app, server };

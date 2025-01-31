@@ -1,7 +1,9 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import { User } from '../models/user';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET, JWT_EXPIRES_IN } from '../config/auth';
+import { AppError } from '../middleware/errorHandler';
+import logger from '../config/logger';
 
 /**
  * @swagger
@@ -104,50 +106,44 @@ router.post('/register', async (req: Request, res: Response): Promise<void> => {
  *         description: Invalid credentials
  */
 // Login endpoint
-router.post('/login', async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { email, password } = req.body;
+router.post(
+  '/login',
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { email, password } = req.body;
 
-    // Find user
-    const user = await User.findOne({ email });
-    if (!user) {
-      res.status(401).json({
-        status: 'error',
-        message: 'Invalid credentials',
+      // Find user
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new AppError('Invalid credentials', 401);
+      }
+
+      // Check password
+      const isMatch = await user.comparePassword(password);
+      if (!isMatch) {
+        throw new AppError('Invalid credentials', 401);
+      }
+
+      // Generate JWT
+      const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
+        expiresIn: JWT_EXPIRES_IN,
       });
-      return;
-    }
 
-    // Check password
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
-      res.status(401).json({
-        status: 'error',
-        message: 'Invalid credentials',
+      logger.info(`User logged in successfully: ${user.email}`);
+
+      res.json({
+        status: 'success',
+        token,
+        user: {
+          id: user._id,
+          email: user.email,
+          name: user.name,
+        },
       });
-      return;
+    } catch (error) {
+      next(error);
     }
-
-    // Generate JWT
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
-      expiresIn: JWT_EXPIRES_IN,
-    });
-
-    res.json({
-      status: 'success',
-      token,
-      user: {
-        id: user._id,
-        email: user.email,
-        name: user.name,
-      },
-    });
-  } catch (error: any) {
-    res.status(400).json({
-      status: 'error',
-      message: error.message,
-    });
   }
-});
+);
 
 export default router;
