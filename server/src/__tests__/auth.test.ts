@@ -39,6 +39,20 @@ describe('Auth Routes', () => {
       expect(response.body.status).toBe('error');
       expect(response.body.message).toBe('Email already registered');
     });
+
+    it('should validate email format', async () => {
+      const invalidUser = {
+        ...testUser,
+        email: 'invalid-email',
+      };
+
+      const response = await request(app)
+        .post('/api/users/register')
+        .send(invalidUser);
+
+      expect(response.status).toBe(400);
+      expect(response.body.status).toBe('error');
+    });
   });
 
   describe('POST /api/users/login', () => {
@@ -56,6 +70,8 @@ describe('Auth Routes', () => {
       expect(response.body.status).toBe('success');
       expect(response.body.token).toBeTruthy();
       expect(response.body.user).toBeTruthy();
+      expect(response.body.user.email).toBe(testUser.email);
+      expect(response.body.user.name).toBe(testUser.name);
     });
 
     it('should not login with incorrect password', async () => {
@@ -66,6 +82,17 @@ describe('Auth Routes', () => {
       const response = await request(app).post('/api/users/login').send({
         email: testUser.email,
         password: 'wrongpassword',
+      });
+
+      expect(response.status).toBe(401);
+      expect(response.body.status).toBe('error');
+      expect(response.body.message).toBe('Invalid credentials');
+    });
+
+    it('should not login with non-existent email', async () => {
+      const response = await request(app).post('/api/users/login').send({
+        email: 'nonexistent@example.com',
+        password: 'password123',
       });
 
       expect(response.status).toBe(401);

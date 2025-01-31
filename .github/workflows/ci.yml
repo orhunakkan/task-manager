@@ -41,6 +41,25 @@ jobs:
         compression-level: 9
         retention-days: 14
 
+    - name: Server - Install Dependencies
+      working-directory: ./server
+      run: |
+        npm install
+        npm i @vitest/coverage-v8
+        npm ci
+        
+    - name: Server - Run Tests
+      working-directory: ./server
+      run: npm run test:coverage
+
+    - name: Upload Server Coverage
+      uses: actions/upload-artifact@v4
+      with:
+        name: server-coverage
+        path: server/coverage
+        compression-level: 9
+        retention-days: 14
+
   lint:
     runs-on: ubuntu-latest
     
