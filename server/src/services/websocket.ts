@@ -20,7 +20,7 @@ class WebSocketService {
     if (process.env.NODE_ENV !== 'test' && server) {
       this.wss = new WebSocket.Server({ server });
       this.wss.on('connection', this.handleConnection.bind(this));
-      
+
       // Ping clients every 30 seconds to keep connections alive
       setInterval(() => {
         this.wss?.clients.forEach((client: WebSocketClient) => {
@@ -87,7 +87,7 @@ class WebSocketService {
     const userClients = this.clients.get(userId);
     if (userClients) {
       const message = JSON.stringify({ event, data });
-      userClients.forEach(client => {
+      userClients.forEach((client) => {
         if (client.readyState === WebSocket.OPEN) {
           client.send(message);
         }
@@ -98,8 +98,8 @@ class WebSocketService {
   public notifyUsers(userIds: string[], event: string, data: any) {
     // Skip notification in test environment
     if (process.env.NODE_ENV === 'test') return;
-    
-    userIds.forEach(userId => this.notifyUser(userId, event, data));
+
+    userIds.forEach((userId) => this.notifyUser(userId, event, data));
   }
 }
 

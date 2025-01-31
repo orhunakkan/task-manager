@@ -61,9 +61,10 @@ app.use(errorHandler);
 const httpServer = http.createServer(app);
 
 // Initialize WebSocket service only in non-test environment
-export const wsService = process.env.NODE_ENV !== 'test' 
-  ? new WebSocketService(httpServer)
-  : new WebSocketService(null as any); // Pass null for test environment
+export const wsService =
+  process.env.NODE_ENV !== 'test'
+    ? new WebSocketService(httpServer)
+    : new WebSocketService(null as any); // Pass null for test environment
 
 let server: ReturnType<typeof httpServer.listen>;
 

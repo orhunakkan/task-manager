@@ -5,7 +5,9 @@ interface WebSocketContextType {
   connected: boolean;
 }
 
-const WebSocketContext = createContext<WebSocketContextType | undefined>(undefined);
+const WebSocketContext = createContext<WebSocketContextType | undefined>(
+  undefined
+);
 
 export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -17,9 +19,10 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     if (isAuthenticated && user) {
       const token = localStorage.getItem('token');
-      const wsUrl = process.env.NODE_ENV === 'production'
-        ? `wss://${window.location.host}/ws?token=${token}`
-        : `ws://localhost:8080/ws?token=${token}`;
+      const wsUrl =
+        process.env.NODE_ENV === 'production'
+          ? `wss://${window.location.host}/ws?token=${token}`
+          : `ws://localhost:8080/ws?token=${token}`;
 
       const websocket = new WebSocket(wsUrl);
 
@@ -50,13 +53,19 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({
     switch (message.event) {
       case 'task:created':
         // Dispatch event for task creation
-        window.dispatchEvent(new CustomEvent('taskCreated', { detail: message.data }));
+        window.dispatchEvent(
+          new CustomEvent('taskCreated', { detail: message.data })
+        );
         break;
       case 'task:updated':
-        window.dispatchEvent(new CustomEvent('taskUpdated', { detail: message.data }));
+        window.dispatchEvent(
+          new CustomEvent('taskUpdated', { detail: message.data })
+        );
         break;
       case 'task:deleted':
-        window.dispatchEvent(new CustomEvent('taskDeleted', { detail: message.data }));
+        window.dispatchEvent(
+          new CustomEvent('taskDeleted', { detail: message.data })
+        );
         break;
     }
   };
