@@ -9,6 +9,7 @@
     "test:coverage": "vitest run --coverage --config ./vitest.config.ts",
     "lint": "eslint .",
     "dev": "nodemon src/app.ts",
+    "server-side": "nodemon src/app.ts",
     "dev:docs": "nodemon src/app.ts",
     "build": "tsc",
     "start": "node dist/app.js",
