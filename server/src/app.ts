@@ -3,6 +3,9 @@ import connectDB from './config/database';
 import path from 'path';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import swaggerJsDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+import swaggerOptions from './config/swagger';
 
 // Routes
 import taskRoutes from './routes/tasks';
@@ -23,6 +26,10 @@ app.use(
 );
 
 app.use(express.json());
+
+// Swagger Documentation
+const specs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Routes first
 app.use('/api/users', authRoutes);

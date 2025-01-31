@@ -2,9 +2,47 @@ import express, { Request, Response } from 'express';
 import { Task, TaskStatus } from '../models/task';
 import { authenticateUser } from '../middleware/auth';
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Task:
+ *       type: object
+ *       required:
+ *         - title
+ *       properties:
+ *         title:
+ *           type: string
+ *         description:
+ *           type: string
+ *         status:
+ *           type: string
+ *           enum: [todo, in_progress, done]
+ *         dueDate:
+ *           type: string
+ *           format: date
+ */
+
 const router = express.Router();
 
-// Create task
+/**
+ * @swagger
+ * /api/tasks:
+ *   post:
+ *     summary: Create a new task
+ *     tags: [Tasks]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Task'
+ *     responses:
+ *       201:
+ *         description: Task created successfully
+ */
 router.post('/', authenticateUser, async (req: Request, res: Response) => {
   try {
     const task = new Task({
@@ -25,7 +63,24 @@ router.post('/', authenticateUser, async (req: Request, res: Response) => {
   }
 });
 
-// Get all tasks for user
+/**
+ * @swagger
+ * /api/tasks:
+ *   get:
+ *     summary: Get all tasks for authenticated user
+ *     tags: [Tasks]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of tasks
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Task'
+ */
 router.get('/', authenticateUser, async (req: Request, res: Response) => {
   try {
     const tasks = await Task.find({ createdBy: req.user?.userId });
