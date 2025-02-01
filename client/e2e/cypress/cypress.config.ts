@@ -7,7 +7,7 @@ export default defineConfig({
     },
     specPattern: 'e2e/cypress/tests/**/*.cy.{js,jsx,ts,tsx}',
     fixturesFolder: 'e2e/cypress/payloads',
-    supportFile: false, // Disable the support file
+    supportFile: false,
     baseUrl: 'http://localhost:3000',
   },
   component: {
@@ -16,5 +16,4 @@ export default defineConfig({
       bundler: 'webpack',
     },
   },
-  projectRoot: 'client',
 });
