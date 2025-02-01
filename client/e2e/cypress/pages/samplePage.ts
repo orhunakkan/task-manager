@@ -1,4 +1,17 @@
+/// <reference types="cypress" />
+
 class SamplePage {
+  
+  firstNameInput: string;
+  lastNameInput: string;
+  jobTitleInput: string;
+  radioButton: string;
+  checkbox: string;
+  dropdownOption: string;
+  datepicker: string;
+  submitButton: string;
+  successMessage: string;
+
   constructor() {
     this.firstNameInput = '#first-name';
     this.lastNameInput = '#last-name';
