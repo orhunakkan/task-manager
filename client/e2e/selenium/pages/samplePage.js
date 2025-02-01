@@ -1,4 +1,5 @@
 class SamplePage {
+  
   constructor(driver) {
     this.driver = driver;
     this.firstNameInput = '#first-name';
@@ -30,4 +31,4 @@ class SamplePage {
   }
 }
 
-module.exports = SamplePage;
+export default SamplePage;
