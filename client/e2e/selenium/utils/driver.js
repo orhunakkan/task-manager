@@ -1,9 +1,9 @@
-const { Builder } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
-const config = require('../config/config');
+import { Builder } from 'selenium-webdriver';
+import { Options } from 'selenium-webdriver/chrome';
+import { browser, windowSize, implicitTimeout } from '../config/config';
 
 async function createDriver() {
-  const options = new chrome.Options();
+  const options = new Options();
   options.addArguments('--no-sandbox');
   options.addArguments('--disable-dev-shm-usage');
   
@@ -12,20 +12,20 @@ async function createDriver() {
   }
 
   const driver = await new Builder()
-    .forBrowser(config.browser)
+    .forBrowser(browser)
     .setChromeOptions(options)
     .build();
 
   await driver.manage().window().setRect({
-    width: config.windowSize.width,
-    height: config.windowSize.height
+    width: windowSize.width,
+    height: windowSize.height
   });
   
   await driver.manage().setTimeouts({
-    implicit: config.implicitTimeout
+    implicit: implicitTimeout
   });
 
   return driver;
 }
 
-module.exports = { createDriver };
+export default { createDriver };
