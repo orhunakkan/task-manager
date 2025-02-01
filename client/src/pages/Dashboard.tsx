@@ -130,7 +130,9 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8" data-testid="dashboard-page">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold" data-testid="dashboard-title">Your Tasks</h1>
+        <h1 className="text-2xl font-bold" data-testid="dashboard-title">
+          Your Tasks
+        </h1>
         <button
           onClick={() => setIsModalOpen(true)}
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
@@ -141,7 +143,10 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" data-testid="dashboard-error">
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
+          data-testid="dashboard-error"
+        >
           {error}
         </div>
       )}
@@ -156,8 +161,18 @@ export const Dashboard: React.FC = () => {
           >
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="font-semibold text-lg" data-testid={`task-title-${task._id}`}>{task.title}</h3>
-                <p className="text-gray-600" data-testid={`task-description-${task._id}`}>{task.description}</p>
+                <h3
+                  className="font-semibold text-lg"
+                  data-testid={`task-title-${task._id}`}
+                >
+                  {task.title}
+                </h3>
+                <p
+                  className="text-gray-600"
+                  data-testid={`task-description-${task._id}`}
+                >
+                  {task.description}
+                </p>
                 <span
                   className={`inline-block px-2 py-1 rounded text-sm ${
                     task.status === 'done'
@@ -194,9 +209,15 @@ export const Dashboard: React.FC = () => {
 
       {/* Modal for Create/Edit Task */}
       {(isModalOpen || editingTask) && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" data-testid="task-modal">
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+          data-testid="task-modal"
+        >
           <div className="bg-white p-6 rounded-lg w-full max-w-md">
-            <h2 className="text-xl font-bold mb-4" data-testid="task-modal-title">
+            <h2
+              className="text-xl font-bold mb-4"
+              data-testid="task-modal-title"
+            >
               {editingTask ? 'Edit Task' : 'Create New Task'}
             </h2>
             <form
