@@ -1,6 +1,6 @@
 import { Builder } from 'selenium-webdriver';
 import { Options } from 'selenium-webdriver/chrome';
-import { browser, windowSize, implicitTimeout } from '../config/config';
+import { browser, windowSize, implicitTimeout } from '../selenium.config';
 
 async function createDriver() {
   const options = new Options();
