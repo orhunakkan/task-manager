@@ -5,5 +5,16 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+    specPattern: 'e2e/cypress/tests/**/*.cy.{js,jsx,ts,tsx}',
+    fixturesFolder: 'e2e/cypress/payloads',
+    supportFile: false, // Disable the support file
+    baseUrl: 'http://localhost:3000',
   },
+  component: {
+    devServer: {
+      framework: 'react',
+      bundler: 'webpack',
+    },
+  },
+  projectRoot: 'client',
 });
