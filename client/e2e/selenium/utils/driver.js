@@ -6,7 +6,7 @@ async function createDriver() {
   const options = new Options();
   options.addArguments('--no-sandbox');
   options.addArguments('--disable-dev-shm-usage');
-  
+
   if (process.env.CI) {
     options.addArguments('--headless');
   }
@@ -16,11 +16,8 @@ async function createDriver() {
     .setChromeOptions(options)
     .build();
 
-  await driver.manage().window().setRect({
-    width: windowSize.width,
-    height: windowSize.height
-  });
-  
+  await driver.manage().window().maximize()
+
   await driver.manage().setTimeouts({
     implicit: implicitTimeout
   });

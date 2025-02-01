@@ -6,10 +6,9 @@ export default defineConfig({
     globals: true,
     include: [
       'src/**/*.{test,spec}.{js,ts,jsx,tsx}',
+      'e2e/selenium/tests/**/*.test.{js,ts}'
     ],
-    exclude: [
-      'e2e/selenium/tests/**/*.test.{js,ts}' // Exclude Selenium tests
-    ],
+    exclude: [],
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
   }
