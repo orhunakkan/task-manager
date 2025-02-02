@@ -8,7 +8,7 @@ export default defineConfig({
       'src/**/*.{test,spec}.{js,ts,jsx,tsx}',
       'e2e/selenium/tests/**/*.test.{js,ts}'
     ],
-    exclude: [],
+    exclude: ['**/node_modules/**', '**/dist/**', '**/coverage/**'],
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
   }
