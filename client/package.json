@@ -21,8 +21,7 @@
     "test:e2e:cypress": "cypress open --config-file e2e/cypress/cypress.config.ts",
     "test:e2e:playwright": "playwright test --config=e2e/playwright/playwright.config.ts",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "test:ci": "vitest run --coverage 'src/**/*.{test,spec}.{js,ts,jsx,tsx}'"
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "Orhun Akkan",
