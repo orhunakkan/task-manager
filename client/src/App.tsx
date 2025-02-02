@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+  useNavigate,
+} from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { WebSocketProvider } from './context/WebSocketContext';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Dashboard } from './pages/Dashboard';
+import { Automation } from './pages/Automation';
+import { WebForm } from './components/automation/WebForm';
 
 // Protected Route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -26,6 +35,7 @@ const Navigation: React.FC<{
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ darkMode, setDarkMode }) => {
   const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <nav className="bg-white dark:bg-dark-card shadow-lg">
@@ -33,7 +43,10 @@ const Navigation: React.FC<{
         <div className="flex justify-between h-16">
           <ul className="flex space-x-4 items-center">
             <li>
-              <Link to="/" className="text-gray-700 dark:text-dark-text hover:text-gray-900">
+              <Link
+                to="/"
+                className="text-gray-700 dark:text-dark-text hover:text-gray-900"
+              >
                 Home
               </Link>
             </li>
@@ -66,6 +79,16 @@ const Navigation: React.FC<{
                     Dashboard
                   </Link>
                 </li>
+                {/* Add Test Automation button for authenticated users */}
+                <li>
+                  <Link
+                    to="/automation"
+                    className="text-gray-700 dark:text-dark-text hover:text-gray-900"
+                    data-testid="automation-link"
+                  >
+                    Test Automation
+                  </Link>
+                </li>
                 <li>
                   <button
                     onClick={logout}
@@ -77,12 +100,14 @@ const Navigation: React.FC<{
               </>
             )}
           </ul>
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="text-gray-700 dark:text-dark-text hover:text-gray-900"
-          >
-            {darkMode ? 'Light Mode' : 'Dark Mode'}
-          </button>
+          <div className="flex items-center">
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="text-gray-700 dark:text-dark-text hover:text-gray-900"
+            >
+              {darkMode ? 'Light Mode' : 'Dark Mode'}
+            </button>
+          </div>
         </div>
       </div>
     </nav>
@@ -119,6 +144,23 @@ export const App: React.FC = () => {
                   element={
                     <ProtectedRoute>
                       <Dashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/automation/*"
+                  element={
+                    <ProtectedRoute>
+                      <Automation />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="/automation" element={<Automation />} />
+                <Route
+                  path="/automation/form"
+                  element={
+                    <ProtectedRoute>
+                      <WebForm />
                     </ProtectedRoute>
                   }
                 />
