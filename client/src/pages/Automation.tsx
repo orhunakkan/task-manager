@@ -33,6 +33,11 @@ const automationSections: AutomationSection[] = [
     path: '/automation/drag-and-drop',
     description: 'Practice drag and drop interactions',
   },
+  {
+    title: 'Drawing in Canvas',
+    path: '/automation/drawing-canvas',
+    description: 'Practice drawing in a canvas element',
+  },
   // Add more sections as needed
 ];
 

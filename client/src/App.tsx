@@ -19,6 +19,7 @@ import { Buttons } from './components/automation/Buttons';
 import { Dropdown } from './components/automation/Dropdown';
 import { MouseOver } from './components/automation/MouseOver';
 import { DragAndDrop } from './components/automation/DragAndDrop';
+import { DrawingCanvas } from './components/automation/DrawingCanvas';
 
 // Protected Route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -196,6 +197,14 @@ export const App: React.FC = () => {
                   element={
                     <ProtectedRoute>
                       <DragAndDrop />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/automation/drawing-canvas"
+                  element={
+                    <ProtectedRoute>
+                      <DrawingCanvas />
                     </ProtectedRoute>
                   }
                 />
