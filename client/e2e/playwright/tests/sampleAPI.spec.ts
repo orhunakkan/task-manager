@@ -7,7 +7,8 @@ test.describe.serial('API Tests', () => {
 
   let registeredUser: { email: any; password: any; name?: string; };
 
-  test('POST /api/users/register - should register a new user', async ({ request }) => {
+  test('POST /api/users/register - should register a new user', async ({ request }, testInfo) => {
+    testInfo.annotations.push({ type: 'severity', description: 'critical' });
     registeredUser = {
       email: faker.internet.email(),
       password: faker.internet.password(),
@@ -23,7 +24,8 @@ test.describe.serial('API Tests', () => {
     expect(responseData.status).toBe('success');
   });
 
-  test('POST /api/users/login - should login user', async ({ request }) => {
+  test('POST /api/users/login - should login user', async ({ request }, testInfo) => {
+    testInfo.annotations.push({ type: 'severity', description: 'critical' });
     const response = await request.post(`${baseURL}/users/login`, {
       data: {
         email: registeredUser.email,

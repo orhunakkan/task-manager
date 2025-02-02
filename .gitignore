@@ -132,3 +132,5 @@ dist
 # Playwright report and test results
 client/e2e/playwright/playwright-report/
 client/e2e/playwright/test-results/
+client/e2e/playwright/allure-results
+client/e2e/playwright/allure-report

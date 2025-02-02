@@ -9,8 +9,8 @@ export default defineConfig({
   fullyParallel: true,
   retries: 1,
   reporter: [
-    ['html', { outputFolder: '/playwright-report' }],
-    ['json', { outputFile: '/test-results/results.json' }]
+    ['list'],
+    ['allure-playwright', { resultsDir: 'client/e2e/playwright/allure-results' }],
   ],
   use: {
     baseURL: 'http://localhost:3000',
@@ -30,5 +30,5 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
   ],
-  outputDir: '/test-results',
+  outputDir: 'test-results',
 });
