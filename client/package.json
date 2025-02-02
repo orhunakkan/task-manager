@@ -18,7 +18,7 @@
     "docker:down": "docker-compose down",
     "docker:build": "docker-compose build",
     "test:e2e:selenium": "vitest run client/e2e/selenium/tests/**/*.test.js",
-    "test:e2e:cypress": "cypress open --config-file e2e/cypress/cypress.config.js",
+    "test:e2e:cypress": "cypress open --config-file e2e/cypress/cypress.config.ts",
     "test:e2e:playwright": "playwright test --config=e2e/playwright/playwright.config.ts"
   },
   "keywords": [],
@@ -44,7 +44,8 @@
     "tailwindcss": "^3.3.0",
     "typescript": "^4.9.5",
     "vitest": "^3.0.4",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "@faker-js/faker": "^9.4.0"
   },
   "dependencies": {
     "@types/node": "^22.10.10",
