@@ -8,10 +8,7 @@ export default defineConfig({
   },
   fullyParallel: true,
   retries: 1,
-  reporter: [
-    ['list'],
-    ['allure-playwright', { resultsDir: 'client/e2e/playwright/allure-results' }],
-  ],
+  reporter: [],
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
