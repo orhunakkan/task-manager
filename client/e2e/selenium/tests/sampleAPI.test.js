@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import axios from 'axios';
+import crypto from 'crypto';
 
 const api = axios.create({
     baseURL: 'http://localhost:8080/api',
@@ -10,10 +11,13 @@ let token;
 describe('API Tests', () => {
     // Register
     it('POST /api/users/register - should register a new user', async () => {
+        const generateRandomString = (length) => {
+            return crypto.randomBytes(length).toString('hex');
+        };
         const userData = {
-            email: 'test@example.com',
-            password: 'password123',
-            name: 'Test User',
+            email: `${generateRandomString(5)}@example.com`,
+            password: generateRandomString(10),
+            name: `User_${generateRandomString(5)}`,
         };
         const resp = await api.post('/users/register', userData);
         expect(resp.status).toBe(201);
