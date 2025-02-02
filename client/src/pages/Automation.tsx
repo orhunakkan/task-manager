@@ -23,6 +23,16 @@ const automationSections: AutomationSection[] = [
     path: '/automation/dropdown',
     description: 'Practice selecting options from dropdowns',
   },
+  {
+    title: 'Mouse Over',
+    path: '/automation/mouse-over',
+    description: 'Practice mouse hover interactions',
+  },
+  {
+    title: 'Drag and Drop',
+    path: '/automation/drag-and-drop',
+    description: 'Practice drag and drop interactions',
+  },
   // Add more sections as needed
 ];
 

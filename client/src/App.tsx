@@ -17,6 +17,8 @@ import { Automation } from './pages/Automation';
 import { WebForm } from './components/automation/WebForm';
 import { Buttons } from './components/automation/Buttons';
 import { Dropdown } from './components/automation/Dropdown';
+import { MouseOver } from './components/automation/MouseOver';
+import { DragAndDrop } from './components/automation/DragAndDrop';
 
 // Protected Route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -81,16 +83,6 @@ const Navigation: React.FC<{
                     Dashboard
                   </Link>
                 </li>
-                {/* Add Test Automation button for authenticated users */}
-                <li>
-                  <Link
-                    to="/automation"
-                    className="text-gray-700 dark:text-dark-text hover:text-gray-900"
-                    data-testid="automation-link"
-                  >
-                    Test Automation
-                  </Link>
-                </li>
                 <li>
                   <button
                     onClick={logout}
@@ -102,7 +94,16 @@ const Navigation: React.FC<{
               </>
             )}
           </ul>
-          <div className="flex items-center">
+          <div className="flex items-center space-x-4">
+            {isAuthenticated && (
+              <Link
+                to="/automation"
+                className="text-gray-700 dark:text-dark-text hover:text-gray-900"
+                data-testid="automation-link"
+              >
+                Test Automation
+              </Link>
+            )}
             <button
               onClick={() => setDarkMode(!darkMode)}
               className="text-gray-700 dark:text-dark-text hover:text-gray-900"
@@ -179,6 +180,22 @@ export const App: React.FC = () => {
                   element={
                     <ProtectedRoute>
                       <Dropdown />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/automation/mouse-over"
+                  element={
+                    <ProtectedRoute>
+                      <MouseOver />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/automation/drag-and-drop"
+                  element={
+                    <ProtectedRoute>
+                      <DragAndDrop />
                     </ProtectedRoute>
                   }
                 />
