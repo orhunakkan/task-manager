@@ -21,6 +21,7 @@ import { MouseOver } from './components/automation/MouseOver';
 import { DragAndDrop } from './components/automation/DragAndDrop';
 import { DrawingCanvas } from './components/automation/DrawingCanvas';
 import { LoadingImages } from './components/automation/LoadingImages';
+import { SlowCalculator } from './components/automation/SlowCalculator';
 
 // Protected Route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -214,6 +215,14 @@ export const App: React.FC = () => {
                   element={
                     <ProtectedRoute>
                       <LoadingImages />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/automation/slow-calculator"
+                  element={
+                    <ProtectedRoute>
+                      <SlowCalculator />
                     </ProtectedRoute>
                   }
                 />

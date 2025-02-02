@@ -43,6 +43,11 @@ const automationSections: AutomationSection[] = [
     path: '/automation/loading-images',
     description: 'Practice loading images dynamically',
   },
+  {
+    title: 'Slow Calculator',
+    path: '/automation/slow-calculator',
+    description: 'Practice using a slow calculator',
+  },
   // Add more sections as needed
 ];
 
