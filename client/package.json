@@ -19,7 +19,10 @@
     "docker:build": "docker-compose build",
     "test:e2e:selenium": "vitest run client/e2e/selenium/tests/**/*.test.js",
     "test:e2e:cypress": "cypress open --config-file e2e/cypress/cypress.config.ts",
-    "test:e2e:playwright": "playwright test --config=e2e/playwright/playwright.config.ts"
+    "test:e2e:playwright": "playwright test --config=e2e/playwright/playwright.config.ts",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ci": "vitest run --coverage --include 'src/**/*.{test,spec}.{js,ts,jsx,tsx}' 'e2e/selenium/tests/**/*.test.{js,ts}'"
   },
   "keywords": [],
   "author": "Orhun Akkan",

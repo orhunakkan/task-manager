@@ -26,12 +26,11 @@ jobs:
       working-directory: ./client
       run: |
         npm install
-        npm i @vitest/coverage-v8
         npm ci
         
     - name: Client - Run Tests
       working-directory: ./client
-      run: npm run client-test:coverage
+      run: npm run test:ci
 
     - name: Upload Client Coverage
       uses: actions/upload-artifact@v4
@@ -45,7 +44,6 @@ jobs:
       working-directory: ./server
       run: |
         npm install
-        npm i @vitest/coverage-v8
         npm ci
         
     - name: Server - Run Tests
