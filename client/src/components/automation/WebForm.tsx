@@ -10,11 +10,13 @@ export const WebForm: React.FC = () => {
     experience: '',
     date: '',
   });
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
     // Add form submission logic here
+    setSuccessMessage('Form submitted successfully!');
   };
 
   const handleChange = (
@@ -29,6 +31,11 @@ export const WebForm: React.FC = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
+      {successMessage && (
+        <div className="bg-green-100 border border-green-400 text-green-700 p-4 mb-4">
+          {successMessage}
+        </div>
+      )}
       <h2 className="text-2xl font-bold mb-6 dark:text-dark-heading">
         Complete Web Form
       </h2>

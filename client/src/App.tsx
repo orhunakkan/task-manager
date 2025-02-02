@@ -15,6 +15,8 @@ import { Register } from './pages/Register';
 import { Dashboard } from './pages/Dashboard';
 import { Automation } from './pages/Automation';
 import { WebForm } from './components/automation/WebForm';
+import { Buttons } from './components/automation/Buttons';
+import { Dropdown } from './components/automation/Dropdown';
 
 // Protected Route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -161,6 +163,22 @@ export const App: React.FC = () => {
                   element={
                     <ProtectedRoute>
                       <WebForm />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/automation/buttons"
+                  element={
+                    <ProtectedRoute>
+                      <Buttons />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/automation/dropdown"
+                  element={
+                    <ProtectedRoute>
+                      <Dropdown />
                     </ProtectedRoute>
                   }
                 />
