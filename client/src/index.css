@@ -1,3 +1,33 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+/* Dark mode styles */
+.dark {
+  --bg-color: theme('colors.dark.background');
+  --text-color: theme('colors.dark.text');
+  --card-color: theme('colors.dark.card');
+  --border-color: theme('colors.dark.border');
+  --heading-color: theme('colors.dark.heading');
+}
+
+.dark body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.dark .bg-white {
+  background-color: var(--card-color);
+}
+
+.dark .text-gray-700 {
+  color: var(--text-color);
+}
+
+.dark .border-gray-300 {
+  border-color: var(--border-color);
+}
+
+.dark .heading {
+  color: var(--heading-color);
+}

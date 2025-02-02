@@ -28,12 +28,12 @@ const Navigation: React.FC<{
   const { isAuthenticated, logout } = useAuth();
 
   return (
-    <nav className="bg-white shadow-lg">
+    <nav className="bg-white dark:bg-dark-card shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16">
           <ul className="flex space-x-4 items-center">
             <li>
-              <Link to="/" className="text-gray-700 hover:text-gray-900">
+              <Link to="/" className="text-gray-700 dark:text-dark-text hover:text-gray-900">
                 Home
               </Link>
             </li>
@@ -42,7 +42,7 @@ const Navigation: React.FC<{
                 <li>
                   <Link
                     to="/login"
-                    className="text-gray-700 hover:text-gray-900"
+                    className="text-gray-700 dark:text-dark-text hover:text-gray-900"
                   >
                     Login
                   </Link>
@@ -50,7 +50,7 @@ const Navigation: React.FC<{
                 <li>
                   <Link
                     to="/register"
-                    className="text-gray-700 hover:text-gray-900"
+                    className="text-gray-700 dark:text-dark-text hover:text-gray-900"
                   >
                     Register
                   </Link>
@@ -61,7 +61,7 @@ const Navigation: React.FC<{
                 <li>
                   <Link
                     to="/dashboard"
-                    className="text-gray-700 hover:text-gray-900"
+                    className="text-gray-700 dark:text-dark-text hover:text-gray-900"
                   >
                     Dashboard
                   </Link>
@@ -69,7 +69,7 @@ const Navigation: React.FC<{
                 <li>
                   <button
                     onClick={logout}
-                    className="text-gray-700 hover:text-gray-900"
+                    className="text-gray-700 dark:text-dark-text hover:text-gray-900"
                   >
                     Logout
                   </button>
@@ -79,7 +79,7 @@ const Navigation: React.FC<{
           </ul>
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className="text-gray-700 hover:text-gray-900"
+            className="text-gray-700 dark:text-dark-text hover:text-gray-900"
           >
             {darkMode ? 'Light Mode' : 'Dark Mode'}
           </button>
@@ -90,7 +90,9 @@ const Navigation: React.FC<{
 };
 
 export const App: React.FC = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('darkMode') === 'true';
+  });
 
   useEffect(() => {
     if (darkMode) {
@@ -98,13 +100,14 @@ export const App: React.FC = () => {
     } else {
       document.documentElement.classList.remove('dark');
     }
+    localStorage.setItem('darkMode', darkMode.toString());
   }, [darkMode]);
 
   return (
     <AuthProvider>
       <WebSocketProvider>
         <BrowserRouter>
-          <div className="min-h-screen dark:bg-gray-900 bg-gray-100">
+          <div className="min-h-screen dark:bg-dark-background bg-gray-100">
             <Navigation darkMode={darkMode} setDarkMode={setDarkMode} />
             <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
               <Routes>
