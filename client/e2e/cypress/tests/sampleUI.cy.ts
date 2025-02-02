@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('UI Tests for Homepage', () => {
     beforeEach(() => {
         cy.visit('/');
