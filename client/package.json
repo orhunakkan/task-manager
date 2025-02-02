@@ -22,7 +22,7 @@
     "test:e2e:playwright": "playwright test --config=e2e/playwright/playwright.config.ts",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:ci": "vitest run --coverage --include 'src/**/*.{test,spec}.{js,ts,jsx,tsx}' 'e2e/selenium/tests/**/*.test.{js,ts}'"
+    "test:ci": "vitest run --coverage 'src/**/*.{test,spec}.{js,ts,jsx,tsx}'"
   },
   "keywords": [],
   "author": "Orhun Akkan",
