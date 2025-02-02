@@ -20,6 +20,7 @@ import { Dropdown } from './components/automation/Dropdown';
 import { MouseOver } from './components/automation/MouseOver';
 import { DragAndDrop } from './components/automation/DragAndDrop';
 import { DrawingCanvas } from './components/automation/DrawingCanvas';
+import { LoadingImages } from './components/automation/LoadingImages';
 
 // Protected Route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -205,6 +206,14 @@ export const App: React.FC = () => {
                   element={
                     <ProtectedRoute>
                       <DrawingCanvas />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/automation/loading-images"
+                  element={
+                    <ProtectedRoute>
+                      <LoadingImages />
                     </ProtectedRoute>
                   }
                 />

@@ -38,6 +38,11 @@ const automationSections: AutomationSection[] = [
     path: '/automation/drawing-canvas',
     description: 'Practice drawing in a canvas element',
   },
+  {
+    title: 'Loading Images',
+    path: '/automation/loading-images',
+    description: 'Practice loading images dynamically',
+  },
   // Add more sections as needed
 ];
 
