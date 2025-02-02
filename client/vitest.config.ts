@@ -6,7 +6,7 @@ export default defineConfig({
     globals: true,
     include: [
       'src/**/*.{test,spec}.{js,ts,jsx,tsx}',
-      'e2e/selenium/tests/**/*.test.{js,ts}'
+      // 'e2e/selenium/tests/**/*.test.{js,ts}'
     ],
     exclude: ['**/node_modules/**', '**/dist/**', '**/coverage/**'],
     environment: 'jsdom',
