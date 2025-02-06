@@ -89,15 +89,6 @@ const Navigation: React.FC<{
             )}
           </ul>
           <div className="flex items-center space-x-4">
-            {isAuthenticated && (
-              <Link
-                to="/automation"
-                className="text-gray-700 dark:text-dark-text hover:text-gray-900"
-                data-testid="automation-link"
-              >
-                Test Automation
-              </Link>
-            )}
             <button
               onClick={() => setDarkMode(!darkMode)}
               className="text-gray-700 dark:text-dark-text hover:text-gray-900"
