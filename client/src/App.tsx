@@ -13,15 +13,6 @@ import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Dashboard } from './pages/Dashboard';
-import { Automation } from './pages/Automation';
-import { WebForm } from './components/automation/WebForm';
-import { Buttons } from './components/automation/Buttons';
-import { Dropdown } from './components/automation/Dropdown';
-import { MouseOver } from './components/automation/MouseOver';
-import { DragAndDrop } from './components/automation/DragAndDrop';
-import { DrawingCanvas } from './components/automation/DrawingCanvas';
-import { LoadingImages } from './components/automation/LoadingImages';
-import { SlowCalculator } from './components/automation/SlowCalculator';
 
 // Protected Route component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
@@ -150,79 +141,6 @@ export const App: React.FC = () => {
                   element={
                     <ProtectedRoute>
                       <Dashboard />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/automation/*"
-                  element={
-                    <ProtectedRoute>
-                      <Automation />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="/automation" element={<Automation />} />
-                <Route
-                  path="/automation/form"
-                  element={
-                    <ProtectedRoute>
-                      <WebForm />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/automation/buttons"
-                  element={
-                    <ProtectedRoute>
-                      <Buttons />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/automation/dropdown"
-                  element={
-                    <ProtectedRoute>
-                      <Dropdown />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/automation/mouse-over"
-                  element={
-                    <ProtectedRoute>
-                      <MouseOver />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/automation/drag-and-drop"
-                  element={
-                    <ProtectedRoute>
-                      <DragAndDrop />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/automation/drawing-canvas"
-                  element={
-                    <ProtectedRoute>
-                      <DrawingCanvas />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/automation/loading-images"
-                  element={
-                    <ProtectedRoute>
-                      <LoadingImages />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/automation/slow-calculator"
-                  element={
-                    <ProtectedRoute>
-                      <SlowCalculator />
                     </ProtectedRoute>
                   }
                 />
