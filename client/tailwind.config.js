@@ -8,11 +8,14 @@ module.exports = {
     extend: {
       colors: {
         dark: {
-          background: '#1a202c',
-          text: '#a0aec0',
-          card: '#2d3748',
-          border: '#4a5568',
-          heading: '#ffffff', // Brighter color for headings
+          background: '#121826', // Darker background for better contrast
+          text: '#e2e8f0', // Much lighter text for better readability
+          card: '#1e293b', // Slightly darker card background
+          border: '#64748b', // Lighter border for better visibility
+          heading: '#ffffff', // Bright white for headings
+          muted: '#94a3b8', // For secondary/muted text with good contrast
+          accent: '#3b82f6', // Bright accent color for interactive elements
+          hover: '#2563eb', // Hover state for interactive elements
         },
       },
     },

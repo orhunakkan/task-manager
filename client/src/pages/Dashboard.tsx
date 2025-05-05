@@ -284,7 +284,7 @@ export const Dashboard: React.FC = () => {
                   data-testid="task-due-date-input"
                 />
               </div>
-              <div className="flex justify-end space-x-2">
+              <div className="flex justify-end space-x-2 task-modal-buttons">
                 <button
                   type="button"
                   onClick={() => {
