@@ -205,7 +205,6 @@ task-manager/
     │   ├── middleware/   # Express middleware
     │   ├── models/       # Mongoose models
     │   └── routes/       # API routes
-    └── tests/            # Test files
 ```
 
 ## 📝 Development Notes
@@ -213,7 +212,6 @@ task-manager/
 - Uses TypeScript for type safety
 - Implements React context for state management
 - TailwindCSS for responsive design
-- Jest for unit and integration testing
 - GitHub Actions for CI/CD
 - Docker support for easy deployment
 

@@ -1,5 +1,5 @@
 # Build stage for React client
-FROM node:18-alpine as client-builder
+FROM node:22-alpine AS client-builder
 WORKDIR /app/client
 COPY client/package*.json ./
 RUN npm install
@@ -7,7 +7,7 @@ COPY client/ ./
 RUN npm run build
 
 # Build stage for Node.js server 
-FROM node:18-alpine as server-builder
+FROM node:22-alpine AS server-builder
 WORKDIR /app/server 
 COPY server/package*.json ./
 RUN npm install
@@ -15,7 +15,7 @@ COPY server/ ./
 RUN npm run build
 
 # Final production stage
-FROM node:18-alpine
+FROM node:22-alpine
 WORKDIR /app
 COPY --from=server-builder /app/server/package*.json ./
 COPY --from=server-builder /app/server/dist ./dist
