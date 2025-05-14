@@ -10,11 +10,6 @@ const connectDB = async (): Promise<void> => {
       return;
     }
 
-    // Skip real MongoDB connection if we're in test environment
-    if (process.env.NODE_ENV === 'test') {
-      return;
-    }
-
     const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
 
     if (!mongoUri) {
@@ -25,10 +20,7 @@ const connectDB = async (): Promise<void> => {
     console.log('MongoDB connected successfully');
   } catch (error) {
     console.error('MongoDB connection error:', error);
-    // Don't exit process if in test environment
-    if (process.env.NODE_ENV !== 'test') {
-      process.exit(1);
-    }
+    process.exit(1);
   }
 };
 

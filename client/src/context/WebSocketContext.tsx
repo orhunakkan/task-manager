@@ -5,13 +5,9 @@ interface WebSocketContextType {
   connected: boolean;
 }
 
-const WebSocketContext = createContext<WebSocketContextType | undefined>(
-  undefined
-);
+const WebSocketContext = createContext<WebSocketContextType | undefined>(undefined);
 
-export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [connected, setConnected] = useState(false);
   const { isAuthenticated, user } = useAuth();
   const [ws, setWs] = useState<WebSocket | null>(null);
@@ -53,28 +49,18 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({
     switch (message.event) {
       case 'task:created':
         // Dispatch event for task creation
-        window.dispatchEvent(
-          new CustomEvent('taskCreated', { detail: message.data })
-        );
+        window.dispatchEvent(new CustomEvent('taskCreated', { detail: message.data }));
         break;
       case 'task:updated':
-        window.dispatchEvent(
-          new CustomEvent('taskUpdated', { detail: message.data })
-        );
+        window.dispatchEvent(new CustomEvent('taskUpdated', { detail: message.data }));
         break;
       case 'task:deleted':
-        window.dispatchEvent(
-          new CustomEvent('taskDeleted', { detail: message.data })
-        );
+        window.dispatchEvent(new CustomEvent('taskDeleted', { detail: message.data }));
         break;
     }
   };
 
-  return (
-    <WebSocketContext.Provider value={{ connected }}>
-      {children}
-    </WebSocketContext.Provider>
-  );
+  return <WebSocketContext.Provider value={{ connected }}>{children}</WebSocketContext.Provider>;
 };
 
 export const useWebSocket = () => {

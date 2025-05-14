@@ -60,20 +60,13 @@ app.use(errorHandler);
 // Create HTTP server
 const httpServer = http.createServer(app);
 
-// Initialize WebSocket service only in non-test environment
-export const wsService =
-  process.env.NODE_ENV !== 'test'
-    ? new WebSocketService(httpServer)
-    : new WebSocketService(null as any); // Pass null for test environment
+// Initialize WebSocket service
+export const wsService = new WebSocketService(httpServer);
 
-let server: ReturnType<typeof httpServer.listen>;
-
-// Only start the server if we're not in test mode
-if (process.env.NODE_ENV !== 'test') {
-  httpServer.listen(port, () => {
-    logger.info(`Server is running on port ${port}`);
-  });
-}
+// Start the server
+const server = httpServer.listen(port, () => {
+  logger.info(`Server is running on port ${port}`);
+});
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (error: Error) => {
@@ -87,4 +80,4 @@ process.on('unhandledRejection', (error: Error) => {
   process.exit(1);
 });
 
-export { app, httpServer as server };
+export { app, server };

@@ -39,9 +39,7 @@ export const Dashboard: React.FC = () => {
     };
 
     const handleTaskUpdated = (e: CustomEvent) => {
-      setTasks((prev) =>
-        prev.map((task) => (task._id === e.detail._id ? e.detail : task))
-      );
+      setTasks((prev) => prev.map((task) => (task._id === e.detail._id ? e.detail : task)));
     };
 
     const handleTaskDeleted = (e: CustomEvent) => {
@@ -53,18 +51,9 @@ export const Dashboard: React.FC = () => {
     window.addEventListener('taskDeleted', handleTaskDeleted as EventListener);
 
     return () => {
-      window.removeEventListener(
-        'taskCreated',
-        handleTaskCreated as EventListener
-      );
-      window.removeEventListener(
-        'taskUpdated',
-        handleTaskUpdated as EventListener
-      );
-      window.removeEventListener(
-        'taskDeleted',
-        handleTaskDeleted as EventListener
-      );
+      window.removeEventListener('taskCreated', handleTaskCreated as EventListener);
+      window.removeEventListener('taskUpdated', handleTaskUpdated as EventListener);
+      window.removeEventListener('taskDeleted', handleTaskDeleted as EventListener);
     };
   }, []);
 
@@ -115,9 +104,7 @@ export const Dashboard: React.FC = () => {
   };
 
   const openEditModal = (task: Task) => {
-    const formattedDate = task.dueDate
-      ? new Date(task.dueDate).toISOString().split('T')[0]
-      : '';
+    const formattedDate = task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : '';
     setEditingTask(task);
     setFormData({
       title: task.title,
@@ -128,51 +115,27 @@ export const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8" data-testid="dashboard-page">
+    <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold" data-testid="dashboard-title">
-          Your Tasks
-        </h1>
+        <h1 className="text-2xl font-bold">Your Tasks</h1>
         <button
           onClick={() => setIsModalOpen(true)}
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          data-testid="add-task-button"
         >
           Add New Task
         </button>
       </div>
 
-      {error && (
-        <div
-          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
-          data-testid="dashboard-error"
-        >
-          {error}
-        </div>
-      )}
+      {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
 
       {/* Task List */}
-      <div className="grid gap-4" data-testid="task-list">
+      <div className="grid gap-4">
         {tasks.map((task) => (
-          <div
-            key={task._id}
-            className="bg-white p-4 rounded-lg shadow border border-gray-200"
-            data-testid={`task-${task._id}`}
-          >
+          <div key={task._id} className="bg-white p-4 rounded-lg shadow border border-gray-200">
             <div className="flex justify-between items-start">
               <div>
-                <h3
-                  className="font-semibold text-lg"
-                  data-testid={`task-title-${task._id}`}
-                >
-                  {task.title}
-                </h3>
-                <p
-                  className="text-gray-600"
-                  data-testid={`task-description-${task._id}`}
-                >
-                  {task.description}
-                </p>
+                <h3 className="font-semibold text-lg">{task.title}</h3>
+                <p className="text-gray-600">{task.description}</p>
                 <span
                   className={`inline-block px-2 py-1 rounded text-sm ${
                     task.status === 'done'
@@ -181,24 +144,15 @@ export const Dashboard: React.FC = () => {
                         ? 'bg-yellow-100 text-yellow-800'
                         : 'bg-gray-100 text-gray-800'
                   }`}
-                  data-testid={`task-status-${task._id}`}
                 >
                   {task.status}
                 </span>
               </div>
               <div className="flex space-x-2">
-                <button
-                  onClick={() => openEditModal(task)}
-                  className="text-blue-500 hover:text-blue-700"
-                  data-testid={`edit-task-button-${task._id}`}
-                >
+                <button onClick={() => openEditModal(task)} className="text-blue-500 hover:text-blue-700">
                   Edit
                 </button>
-                <button
-                  onClick={() => handleDeleteTask(task._id)}
-                  className="text-red-500 hover:text-red-700"
-                  data-testid={`delete-task-button-${task._id}`}
-                >
+                <button onClick={() => handleDeleteTask(task._id)} className="text-red-500 hover:text-red-700">
                   Delete
                 </button>
               </div>
@@ -209,61 +163,34 @@ export const Dashboard: React.FC = () => {
 
       {/* Modal for Create/Edit Task */}
       {(isModalOpen || editingTask) && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-          data-testid="task-modal"
-        >
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg w-full max-w-md">
-            <h2
-              className="text-xl font-bold mb-4"
-              data-testid="task-modal-title"
-            >
-              {editingTask ? 'Edit Task' : 'Create New Task'}
-            </h2>
-            <form
-              onSubmit={editingTask ? handleEditTask : handleCreateTask}
-              className="space-y-4"
-              data-testid="task-form"
-            >
+            <h2 className="text-xl font-bold mb-4">{editingTask ? 'Edit Task' : 'Create New Task'}</h2>
+            <form onSubmit={editingTask ? handleEditTask : handleCreateTask} className="space-y-4">
               <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Title:
-                </label>
+                <label className="block text-gray-700 text-sm font-bold mb-2">Title:</label>
                 <input
                   type="text"
                   value={formData.title}
-                  onChange={(e) =>
-                    setFormData({ ...formData, title: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   className="w-full px-3 py-2 border rounded"
                   required
-                  data-testid="task-title-input"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Description:
-                </label>
+                <label className="block text-gray-700 text-sm font-bold mb-2">Description:</label>
                 <textarea
                   value={formData.description}
-                  onChange={(e) =>
-                    setFormData({ ...formData, description: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   className="w-full px-3 py-2 border rounded"
-                  data-testid="task-description-input"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Status:
-                </label>
+                <label className="block text-gray-700 text-sm font-bold mb-2">Status:</label>
                 <select
                   value={formData.status}
-                  onChange={(e) =>
-                    setFormData({ ...formData, status: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                   className="w-full px-3 py-2 border rounded"
-                  data-testid="task-status-select"
                 >
                   <option value="todo">To Do</option>
                   <option value="in_progress">In Progress</option>
@@ -271,17 +198,12 @@ export const Dashboard: React.FC = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Due Date:
-                </label>
+                <label className="block text-gray-700 text-sm font-bold mb-2">Due Date:</label>
                 <input
                   type="date"
                   value={formData.dueDate}
-                  onChange={(e) =>
-                    setFormData({ ...formData, dueDate: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
                   className="w-full px-3 py-2 border rounded"
-                  data-testid="task-due-date-input"
                 />
               </div>
               <div className="flex justify-end space-x-2 task-modal-buttons">
@@ -298,15 +220,10 @@ export const Dashboard: React.FC = () => {
                     });
                   }}
                   className="px-4 py-2 text-gray-600 hover:text-gray-800"
-                  data-testid="task-cancel-button"
                 >
                   Cancel
                 </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                  data-testid="task-submit-button"
-                >
+                <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                   {editingTask ? 'Save Changes' : 'Create Task'}
                 </button>
               </div>

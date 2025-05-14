@@ -8,7 +8,6 @@ A full-stack task management application built with modern technologies that all
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [Docker Deployment](#docker-deployment)
-- [Testing](#testing)
 - [API Documentation](#api-documentation)
 - [Project Architecture](#project-architecture)
 - [Best Practices & Security](#best-practices--security)
@@ -27,7 +26,6 @@ A full-stack task management application built with modern technologies that all
 ### Frontend
 - React 18 with TypeScript
 - TailwindCSS for styling
-- Vitest for unit testing
 - React Router for navigation
 - Axios for API communication
 
@@ -129,20 +127,6 @@ npm start
 The application will be available at:
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:3000/api
-
-## 🧪 Testing
-
-### Backend Tests
-```bash
-cd server
-npm test
-```
-
-### Frontend Tests
-```bash
-cd client
-npm test
-```
 
 ## 📚 API Documentation
 

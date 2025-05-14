@@ -1,13 +1,3 @@
 {
-  "vitest.commandLine": "npm test",
-  "vitest.include": [
-    "client/src/**/*.{test,spec}.{js,tsx,ts,jsx}",
-    "client/e2e/selenium/tests/**/*.test.{js,ts}"
-  ],
-  "vitest.exclude": ["**/node_modules/**", "**/dist/**", "**/coverage/**"],
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "playwright.reporter": [
-    ["html", { "outputFolder": "client/e2e/playwright/playwright-report" }],
-    ["json", { "outputFile": "client/e2e/playwright/test-results/results.json" }]
-  ]
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

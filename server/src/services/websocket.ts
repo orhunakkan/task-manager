@@ -16,8 +16,8 @@ class WebSocketService {
   constructor(server: Server | null) {
     this.clients = new Map();
 
-    // Only initialize WebSocket server if we're not in test environment
-    if (process.env.NODE_ENV !== 'test' && server) {
+    // Initialize WebSocket server
+    if (server) {
       this.wss = new WebSocket.Server({ server });
       this.wss.on('connection', this.handleConnection.bind(this));
 
@@ -81,9 +81,6 @@ class WebSocketService {
   }
 
   public notifyUser(userId: string, event: string, data: any) {
-    // Skip notification in test environment
-    if (process.env.NODE_ENV === 'test') return;
-
     const userClients = this.clients.get(userId);
     if (userClients) {
       const message = JSON.stringify({ event, data });
@@ -96,9 +93,6 @@ class WebSocketService {
   }
 
   public notifyUsers(userIds: string[], event: string, data: any) {
-    // Skip notification in test environment
-    if (process.env.NODE_ENV === 'test') return;
-
     userIds.forEach((userId) => this.notifyUser(userId, event, data));
   }
 }

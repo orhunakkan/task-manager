@@ -24,34 +24,18 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div
-      className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8"
-      data-testid="login-page"
-    >
-      <h1
-        className="text-2xl font-bold mb-6 text-center"
-        data-testid="login-title"
-      >
+    <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8" data-testid="login-page">
+      <h1 className="text-2xl font-bold mb-6 text-center" data-testid="login-title">
         Login
       </h1>
       {error && (
-        <div
-          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
-          data-testid="login-error"
-        >
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" data-testid="login-error">
           {error}
         </div>
       )}
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-4"
-        data-testid="login-form"
-      >
+      <form onSubmit={handleSubmit} className="space-y-4" data-testid="login-form">
         <div>
-          <label
-            htmlFor="email"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
+          <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
             Email:
           </label>
           <input
@@ -59,18 +43,13 @@ export const Login: React.FC = () => {
             type="email"
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
             value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             required
             data-testid="login-email"
           />
         </div>
         <div>
-          <label
-            htmlFor="password"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
+          <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
             Password:
           </label>
           <input
@@ -78,9 +57,7 @@ export const Login: React.FC = () => {
             type="password"
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
             value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             required
             data-testid="login-password"
           />

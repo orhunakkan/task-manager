@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  Navigate,
-  useNavigate,
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { WebSocketProvider } from './context/WebSocketContext';
 import { Home } from './pages/Home';
@@ -15,9 +8,7 @@ import { Register } from './pages/Register';
 import { Dashboard } from './pages/Dashboard';
 
 // Protected Route component
-const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
@@ -41,28 +32,19 @@ const Navigation: React.FC<{
         <div className="flex justify-between h-16">
           <ul className="flex space-x-4 items-center">
             <li>
-              <Link
-                to="/"
-                className="text-gray-700 dark:text-dark-text hover:text-gray-900"
-              >
+              <Link to="/" className="text-gray-700 dark:text-dark-text hover:text-gray-900">
                 Home
               </Link>
             </li>
             {!isAuthenticated ? (
               <>
                 <li>
-                  <Link
-                    to="/login"
-                    className="text-gray-700 dark:text-dark-text hover:text-gray-900"
-                  >
+                  <Link to="/login" className="text-gray-700 dark:text-dark-text hover:text-gray-900">
                     Login
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/register"
-                    className="text-gray-700 dark:text-dark-text hover:text-gray-900"
-                  >
+                  <Link to="/register" className="text-gray-700 dark:text-dark-text hover:text-gray-900">
                     Register
                   </Link>
                 </li>
@@ -70,18 +52,12 @@ const Navigation: React.FC<{
             ) : (
               <>
                 <li>
-                  <Link
-                    to="/dashboard"
-                    className="text-gray-700 dark:text-dark-text hover:text-gray-900"
-                  >
+                  <Link to="/dashboard" className="text-gray-700 dark:text-dark-text hover:text-gray-900">
                     Dashboard
                   </Link>
                 </li>
                 <li>
-                  <button
-                    onClick={logout}
-                    className="text-gray-700 dark:text-dark-text hover:text-gray-900"
-                  >
+                  <button onClick={logout} className="text-gray-700 dark:text-dark-text hover:text-gray-900">
                     Logout
                   </button>
                 </li>
