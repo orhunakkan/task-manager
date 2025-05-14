@@ -7,7 +7,7 @@ export default defineConfig({
     include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
     exclude: ['**/node_modules/**', '**/dist/**', '**/coverage/**'],
     environment: 'jsdom',
-    setupFiles: ['./src/test/setup.ts'], // Remove 'allure-vitest/setup'
+    setupFiles: ['./src/test/setup.ts'],
     reporters: ["verbose"],
   }
 });
