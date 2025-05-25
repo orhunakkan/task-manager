@@ -11,7 +11,7 @@ Minimal Task Manager App
 
 ---
 
-Ticket 2: Serve Static HTML and JS Files with Node.js
+✅ Ticket 2: Serve Static HTML and JS Files with Node.js
 
 * Implement static file serving for `/` (HTML) and `/script.js`.
 * Confirm the browser loads your HTML and script correctly.
