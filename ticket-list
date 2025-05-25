@@ -1,0 +1,84 @@
+
+
+Minimal Task Manager App
+
+---
+
+Ticket 1: Set Up Basic Node.js Project Structure
+
+* Initialize a Node.js project (`npm init`).
+* Create a main server file (e.g., `server.js`).
+* Create a `public/` folder to hold static assets (HTML, JS).
+* Decide how you will store tasks (in-memory or `tasks.json` file).
+
+---
+
+Ticket 2: Serve Static HTML and JS Files with Node.js
+
+* Implement static file serving for `/` (HTML) and `/script.js`.
+* Confirm the browser loads your HTML and script correctly.
+
+---
+
+Ticket 3: Design and Implement Basic HTML UI
+
+* Create a form with an input field and submit button to add tasks.
+* Display a list of tasks dynamically in the browser.
+* Style it minimally if desired (optional).
+
+---
+
+Ticket 4: Create API Endpoint to Fetch All Tasks (`GET /tasks`)
+
+* Set up a backend route that returns all tasks in JSON.
+* Use `fetch` in frontend JS to load tasks into the UI.
+
+---
+
+Ticket 5: Create API Endpoint to Add a Task (`POST /tasks`)
+
+* Handle task creation on the backend.
+* Add unique IDs to tasks.
+* Update the frontend to send new tasks and reload the list.
+
+---
+
+Ticket 6: Create API Endpoint to Delete a Task (`DELETE /tasks/:id`)
+
+* Enable deletion of a task by its ID.
+* Add "Delete" buttons in the UI for each task.
+* Reload the task list after deletion.
+
+---
+
+Ticket 7: Create API Endpoint to Edit a Task (`PUT /tasks/:id`)
+
+* Allow editing an existing task by its ID.
+* Add an "Edit" button to the UI.
+* Pre-fill the input field or use a modal/editable field.
+
+---
+
+Ticket 8: Implement File-Based Task Persistence (Optional)
+
+* Use `fs` module to read/write tasks to a JSON file.
+* Load from the file on server startup.
+* Save to the file after create, update, or delete.
+
+---
+
+Ticket 9: Handle Basic Error Cases (Optional)
+
+* Gracefully handle missing fields or bad requests.
+* Add 404 for unsupported routes.
+* Send appropriate status codes (200, 201, 204, 400, 404).
+
+---
+
+Ticket 10: Refactor and Clean Up Code
+
+* Separate logic into functions for readability.
+* Avoid repeated code (e.g., task reading/writing).
+* Add comments and improve naming for clarity.
+
+---
