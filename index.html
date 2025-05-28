@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
 
 <h2>WELCOME TO MY TASK MANAGER APP</h2>
 <p>This app will help you create, edit or delete your tasks</p>
 
-<button>Create a task</button>
+<button id="create-task-button" >Create a task</button>
 <button>Edit a task</button>
 <button>Delete a task</button>
+
+<br>
+
+<form id="task-form">
+  <label for="task-name">Task Name:</label><br>
+  <input type="text" id="task-name" name="task-name"><br>
+  <label for="description">Description:</label><br>
+  <input type="text" id="task-description" name="task-description"><br>
+  <label for="due-date">Due Date:</label><br>
+  <input type="date" id="due-date" name="due-date"><br>
+  <span id="close-btn">×</span>
+</form>
 
 <script src="script.js"></script>
 
