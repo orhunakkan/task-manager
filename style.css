@@ -1,7 +1,7 @@
 #task-form {
   display: none;
   position: fixed;
-  top: 50%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-width: 2px;
@@ -11,9 +11,9 @@
 
 #close-btn {
   position: absolute;
-  top: 4px;
+  top: 0px;
   right: 12px;
-  font-size: 20px;
+  font-size: 30px;
   cursor: pointer;
   color: #888;
 }
