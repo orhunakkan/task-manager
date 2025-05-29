@@ -2,6 +2,7 @@
   "name": "task-manager",
   "version": "1.0.0",
   "description": "task-manager",
+  "type": "module",
   "scripts": {},
   "author": "Orhun Akkan",
   "license": "ISC",
