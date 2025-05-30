@@ -7,6 +7,9 @@
   "author": "Orhun Akkan",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "pg": "^8.11.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
