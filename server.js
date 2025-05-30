@@ -1,22 +1,18 @@
 import { createServer } from 'http';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { extname } from 'path';
-import { readFile } from 'fs';
 
 const server = createServer((req, res) => {
-    // Set CORS headers to allow requests from any origin
+
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    
-    // Handle preflight requests
+
     if (req.method === 'OPTIONS') {
         res.writeHead(204);
         res.end();
         return;
     }
 
-    // Static file handling
     if (req.url === '/') {
         const html = readFileSync('./public/index.html');
         res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -44,14 +40,14 @@ const server = createServer((req, res) => {
         req.on('data', chunk => {
             body += chunk.toString(); // Convert Buffer to string
         });
-        
+
         req.on('end', () => {
             console.log('Received body:', body); // Log received data for debugging
-            
+
             try {
                 const newTask = JSON.parse(body);
                 console.log('Parsed task:', newTask);
-                
+
                 newTask.id = Math.random().toString(15);
                 newTask.createdAt = new Date().toISOString();
 
@@ -79,13 +75,13 @@ const server = createServer((req, res) => {
                 res.end(JSON.stringify({ error: 'Invalid task data: ' + error.message }));
             }
         });
-        
+
         req.on('error', (err) => {
             console.error('Request error:', err);
             res.writeHead(500, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ error: 'Server error processing request' }));
         });
-        
+
         return;
     }
 
