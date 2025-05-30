@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "task-manager",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "start": "node index.js"
+  },
   "author": "Orhun Akkan",
   "license": "ISC",
   "dependencies": {
