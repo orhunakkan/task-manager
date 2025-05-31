@@ -63,10 +63,21 @@ input, textarea {
     cursor: pointer;
     font-size: 16px;
     border-radius: 4px;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
 .btn:hover {
     background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
 }
 
 .task-item {
@@ -75,26 +86,42 @@ input, textarea {
     padding: 15px;
     margin-bottom: 10px;
     background-color: #f9f9f9;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.task-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-overdue {
+    border-left: 4px solid #e74c3c;
 }
 
 .task-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
+    align-items: center;
 }
 
 .task-title {
     font-weight: bold;
     font-size: 18px;
+    color: #2c3e50;
 }
 
 .task-date {
     color: #777;
     font-size: 14px;
+    font-style: italic;
 }
 
 .task-description {
     margin-bottom: 10px;
+    color: #555;
+    line-height: 1.4;
 }
 
 #noTasks {
@@ -132,4 +159,26 @@ input, textarea {
 .form-actions {
     display: flex;
     justify-content: flex-start;
+}
+
+/* Animation for task items */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Add responsive styles */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .task-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .task-date {
+        margin-top: 5px;
+    }
 }

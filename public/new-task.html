@@ -1,53 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
+    <meta name="description" content="Add new task to your task manager">
+    <title>Task Manager - New Task</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
-        <h1>Task Manager</h1>
-        
-        <div class="task-button-container">
-            <button id="newTaskBtn" class="btn btn-primary">+ New Task</button>
-        </div>
-        
-        <div class="task-form" id="taskFormContainer" style="display: none;">
+        <header>
+            <h1>Task Manager</h1>
+        </header>
+
+        <section class="task-form">
             <h2>Add New Task</h2>
             <form id="taskForm">
                 <div class="form-group">
                     <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" required>
+                    <input type="text" id="title" name="title" required autocomplete="off" placeholder="Enter task title">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="description">Description:</label>
-                    <textarea id="description" name="description" rows="3"></textarea>
+                    <textarea id="description" name="description" rows="3" placeholder="Enter task description"></textarea>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="dueDate">Due Date:</label>
                     <input type="date" id="dueDate" name="dueDate">
                 </div>
-                
+
                 <div class="form-actions">
                     <button type="submit" class="btn btn-success">Add Task</button>
-                    <button type="button" id="cancelBtn" class="btn btn-cancel">Cancel</button>
+                    <a href="/home" class="btn btn-cancel">Cancel</a>
                 </div>
             </form>
-        </div>
-        
-        <div class="task-list">
-            <h2>Your Tasks</h2>
-            <div id="tasks">
-                <!-- Tasks will be loaded here -->
-                <p id="noTasks">No tasks yet. Add a task to get started!</p>
-            </div>
-        </div>
+        </section>
     </div>
-    
-    <script src="script.js"></script>
+
+    <script src="new-task.js"></script>
 </body>
+
 </html>
